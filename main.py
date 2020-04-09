@@ -4,14 +4,15 @@ import Button
 
 def run_game():
 
+    #initialize pygame and "static" elements
     pygame.init()
     setting = Settings()
 
-
     screen = pygame.display.set_mode((setting.screen_width, setting.screen_height))
     font = pygame.font.SysFont("comicsansms", 25)
+    normal_font = pygame.font.SysFont("calibri", 27)
+    write_array = [normal_font.render("Test", True, (0,128,0))]*20
 
-    text = font.render("Hello World", True, (0, 128, 0))
     portrait = pygame.Surface((170, 170))
     map = pygame.Surface((250, 250))
     square = pygame.Surface((50, 50))
@@ -26,8 +27,6 @@ def run_game():
 
     buttons = [button1, button2, button3, button4, button5, button6]
 
-    
-
     screen.fill(setting.bg_color)
     screen.blit(portrait, (40, 40))
 
@@ -38,19 +37,13 @@ def run_game():
     pygame.draw.line(screen, (0,0,0), (850, 0), (850, 800), 10)
     pygame.draw.line(screen, (0,0,0), (250, 580), (850, 580), 10)
     
-
     for j in range(0, 10):
         pygame.draw.line(screen, (0,0,0), (900, 350+j*40), (1150, 350+j*40), 8)
 
     pygame.draw.line(screen, (0,0,0), (900, 350), (900, 710), 8)
     pygame.draw.line(screen, (0,0,0), (1150, 350), (1150, 710), 8)
 
-    
-
-    
-
-    
-
+    #main gameplay loop, redraw changable elements
     while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -64,10 +57,11 @@ def run_game():
             screen.blit(button.surface, button.position)
             caption = font.render(button.caption, True, (0, 128, 0))
             screen.blit(caption, button.position)
-            
-        
-        
 
+        for line in range(0, len(write_array)):
+            screen.blit(write_array[line], (256, line*29))
+
+            
         pygame.display.flip()
 
 
