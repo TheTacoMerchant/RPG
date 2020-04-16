@@ -1,6 +1,7 @@
 import pygame, sys, csv, os
 from Settings import Settings
 import Button
+from pathlib import Path
 from text_file_reader import read_from_file
 
 
@@ -91,8 +92,9 @@ def load_stage(name):
 
     return_arr = []
     normal_font = pygame.font.SysFont("calibri", 27)
-    stages_dir = os.path.dirname(os.path.realpath(__file__)) + '\stages'
-    raw_arr = read_from_file(stages_dir + "\\" + name + ".txt")
+    stages_dir = Path("stages")
+    file_path = stages_dir / (name + ".txt")
+    raw_arr = read_from_file(file_path)
     opening = raw_arr['opening']
     opening_arr = opening.split()
     working_str =  opening_arr.pop(0)
