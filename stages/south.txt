@@ -1,0 +1,4 @@
+opening|A dark and desolate place, the South. Many who can't stand the cold return to their hearths in the North.|
+Yes|Good choice, my dear liberal.|
+No|Time to die.|
+button1|c=Go Northc, l=testl,|
