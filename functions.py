@@ -73,6 +73,10 @@ def parse_str(string):
 
         while normal_font.size(working_str)[0] < 590 and string_arr:
             old_str = working_str
+            if old_str == '{}':
+                old_str = ""
+                break
+
             working_str = working_str + " " + string_arr[0]
 
             if string_arr[0] == '{}':
