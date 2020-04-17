@@ -66,13 +66,19 @@ def parse_str(string):
 
     return_arr = []
     string_arr = string.split()
-    working_str =  string_arr.pop(0)
     normal_font = pygame.font.SysFont("calibri", 27)
     
     while string_arr:
+        working_str = string_arr.pop(0)
+
         while normal_font.size(working_str)[0] < 590 and string_arr:
             old_str = working_str
             working_str = working_str + " " + string_arr[0]
+
+            if string_arr[0] == '{}':
+                string_arr.pop(0)
+                break
+
             if normal_font.size(working_str)[0] < 590:
                 string_arr.pop(0)
             
@@ -81,11 +87,6 @@ def parse_str(string):
             old_str = working_str
 
         return_arr.append(normal_font.render(old_str, True, (0,128,0)))
-        
-        if string_arr:
-            working_str = string_arr[0]
-            string_arr.pop(0)
-    
     return return_arr
 
 def init_buttons(array):
@@ -105,23 +106,22 @@ def init_buttons(array):
     for button in range(0,6):
         try:
             buttonget = array[buttons[button]]
-            print('here')
+            
             if buttonget.find('c=') != -1:
                 start_ind = buttonget.find('c=')
                 end_ind = buttonget.find('c,')
-                print(start_ind)
-                print(end_ind)
+                
                 caption = buttonget[start_ind+2:end_ind]
-                print('here1')
+                
             else:
                 caption = buttons[button]
-                print('here2')
+                
             if buttonget.find('l=') != -1:
                 link = buttonget[buttonget.find('l=')+2: buttonget.find('l,')]
-                print('here3')
+                
             else:
                 link = None
-                print('here4')
+                
             new_buttons.append(Button(caption, link, pygame.Rect(button_positions[button], button_dim), button_positions[button]))
         
         except:
